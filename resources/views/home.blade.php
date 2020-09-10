@@ -23,7 +23,7 @@
 
 <div class="container">
 
-<h1>Blog Posts</h1>
+<h1 class="pink-text">All Posts</h1>
 
 @if(session('successMsg'))
     {{ session('successMsg') }}
@@ -43,42 +43,48 @@
 
     <td>
 
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">{{ $posts->p_title }}</h5>
-            <p class="card-text">{{ $posts->p_content }}</p>
-            
-            <a class="btn btn-raised btn-primary btn-sm" href="{{ route('edit', $posts->p_id) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
-                        </a>
+        <div class="card card-image" style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
 
-                        ||
+          <!-- <div class="card-body"> -->
+          <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
 
-                        <form id="delete-form-{{ $posts->p_id }}" action="{{ route('delete', $posts->p_id) }}" method="POST" style="display:none;">
-                        
-                        {{ csrf_field() }}          
-                        {{ method_field('delete') }}
+            <div>
 
-                      </form>
+              <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Cyber Security</h5>
+              <h5 class="card-title pt-2">{{ $posts->p_title }}</h5>
+              <p>{{ $posts->p_content }}</p>
 
-                      <button onclick="if(confirm('Are you sure to delete this post?')) {
+              <!-- <a class="btn btn-raised btn-primary btn-sm" href="{{ route('edit', $posts->p_id) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+                          </a>
 
-                        event.preventDefault();
-                        document.getElementById('delete-form-{{ $posts->p_id }}').submit();
+                          ||
 
-                      }else{
-                        event.preventDefault();
-                      }
+                          <form id="delete-form-{{ $posts->p_id }}" action="{{ route('delete', $posts->p_id) }}" method="POST" style="display:none;">
+                          
+                          {{ csrf_field() }}          
+                          {{ method_field('delete') }}
 
-                      " class="btn btn-raised btn-danger btn-sm" href=""> 
+                        </form>
 
-                      <i class="fa fa-trash" aria-hidden="true"></i> 
+                        <button onclick="if(confirm('Are you sure to delete this post?')) {
 
-                      </button>
+                          event.preventDefault();
+                          document.getElementById('delete-form-{{ $posts->p_id }}').submit();
+
+                        }else{
+                          event.preventDefault();
+                        }
+
+                        " class="btn btn-raised btn-danger btn-sm" href=""> 
+
+                        <i class="fa fa-trash" aria-hidden="true"></i> 
+
+                        </button> -->
+
+           </div>
 
           </div>
         </div>
-
-        <!-- Hello -->
 
     </td>
 

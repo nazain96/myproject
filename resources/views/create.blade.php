@@ -10,7 +10,11 @@
 		@endforeach
 	@endif
 
-<h1>Create Page</h1>
+<h1 class="pink-text">Create Page</h1>
+
+<div class="row justify-content-center">
+
+        <div class="col-md-8">
 
 <!-- Default form contact -->
 <form class="text-center border border-light p-5" action="{{ route('store') }}" method="POST">
@@ -27,11 +31,13 @@
     </div>
 
     <!-- Send button -->
-    <button class="btn btn-info btn-block" type="submit">Create Content</button>
+    <button style="background-color: #800000;" class="text-white btn btn-block" type="submit">Create Content</button>
 
 </form>
 <!-- Default form contact -->
 
+</div>
+</div>
 </div>
 
 @endsection

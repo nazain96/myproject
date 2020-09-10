@@ -43,6 +43,8 @@ Route::post('/update/{id}', 'BlogController@update' )->name('update');
 
 Route::delete('/delete/{id}', 'BlogController@delete' )->name('delete');
 
+Route::get('/mypost', 'BlogController@mypost' )->name('mypost');
+
 Auth::routes();
 
 Route::get('/home', 'BlogController@index')->name('home');

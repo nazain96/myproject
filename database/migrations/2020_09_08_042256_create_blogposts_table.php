@@ -15,8 +15,8 @@ class CreateBlogpostsTable extends Migration
     {
         Schema::create('blogposts', function (Blueprint $table) {
             $table->bigIncrements('p_id');
-            $table->string('p_title');
-            $table->string('p_content');
+            $table->string('p_title', 50);
+            $table->string('p_content', 500);
             $table->timestamps();
         });
     }

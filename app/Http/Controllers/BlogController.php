@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Blogpost;
 
 class BlogController extends Controller
@@ -14,30 +15,39 @@ class BlogController extends Controller
     //     return view('houston');
     // }
 
+    // public function home(){
+
+    //  $post = Blogpost::paginate(5);
+
+    //  return view('homepage', compact('post'));
+    // }
+
+    // public function index(){
+
+    //  $post = Blogpost::paginate(5);
+
+    //  return view('homepage', compact('post'));
+    // }
+
     public function __construct()
     {
         $this->middleware('auth');
     }
-
-    public function home(){
-
-     $post = Blogpost::paginate(5);
-
-     return view('homepage', compact('post'));
-    }
-
-    // public function index(){
-
-    // 	$post = Blogpost::paginate(5);
-
-    // 	return view('homepage', compact('post'));
-    // }
 
     public function index(){
 
      $post = Blogpost::paginate(5);
 
      return view('home', compact('post'));
+    }
+
+    public function mypost(){
+
+     $userid = Auth::id();
+
+     $post = Blogpost::all()->where('user_id', $userid);
+
+     return view('mypost', compact('post'));
     }
 
     public function create(){
@@ -51,10 +61,11 @@ class BlogController extends Controller
 
     	$post->p_title = $request->title;
     	$post->p_content = $request->content;
+        $post->user_id = Auth::id();
 
     	$post->save();
 
-    	return redirect(route('home'))->with('successMsg', 'Post Successfully Created');
+    	return redirect(route('mypost'))->with('successMsg', 'Post Successfully Created');
     }
 
     public function edit($id){
@@ -74,13 +85,13 @@ class BlogController extends Controller
 
     	$post->save();
 
-    	return redirect(route('home'))->with('successMsg', 'Post Successfully Updated');
+    	return redirect(route('mypost'))->with('successMsg', 'Post Successfully Updated');
     }
 
     public function delete($id){
 
     	Blogpost::where('p_id', $id)->first()->delete();
 
-    	return redirect(route('home'))->with('successMsg', 'Post Successfully Deleted');
+    	return redirect(route('mypost'))->with('successMsg', 'Post Successfully Deleted');
     }
 }

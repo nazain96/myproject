@@ -37,6 +37,13 @@
     <!-- Fonts -->
 
     <!-- Styles -->
+    <style type="text/css">
+        
+        body {
+          background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);
+        }
+
+    </style>
 
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">  -->
 
@@ -47,7 +54,7 @@
 <body>
     <div id="app">
 
-        <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+        <nav class="mb-1 navbar navbar-expand-lg navbar-dark " style="background-color: #800000;">
 
             <div class="container">
 
@@ -69,6 +76,7 @@
                             <div class="top-right links">
 
                                 @auth
+                                    <a style="color: white;" href="{{ route('mypost') }}">My Post |</a>
                                     <a style="color: white;" href="{{ url('/create') }}">Add Post</a>
                                 
                                 @endauth

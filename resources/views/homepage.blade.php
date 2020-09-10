@@ -8,7 +8,7 @@
 <h1>Home Page</h1>
 
 @if(session('successMsg'))
-	{{ session('successMsg') }}
+  {{ session('successMsg') }}
 @endif
 
 <div class="container">
@@ -62,10 +62,6 @@
 </table>
 
 </div>
-
-
-
-	{{ $post->links() }}
 
 </div>
 
