@@ -13,17 +13,17 @@
 <h1>Edit Page</h1>
 
 <!-- Default form contact -->
-<form class="text-center border border-light p-5" action="{{ route('update', $post->p_id) }}" method="POST">
+<form class="text-center border border-light p-5" action="{{ route('update', $post->id) }}" method="POST">
 
 	{{ csrf_field() }}
 
     <p class="h4 mb-4">Edit Content</p>
 
     <!-- Name -->
-    <input type="text" id="defaultContactFormName" class="form-control mb-4" value="{{ $post->p_title }}" name="title" placeholder="Title">
+    <input type="text" id="defaultContactFormName" class="form-control mb-4" value="{{ $post->title }}" name="title" placeholder="Title">
 
 	<div class="form-group">
-        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="5" value="{{ $post->p_content }}" name="content" placeholder="Content">{{ $post->p_content }}</textarea>
+        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="5" value="{{ $post->content }}" name="content" placeholder="Content">{{ $post->content }}</textarea>
     </div>
 
     <!-- Send button -->

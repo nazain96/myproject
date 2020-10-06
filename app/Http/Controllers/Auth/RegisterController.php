@@ -8,6 +8,11 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Role;
+use App\ApiKey;
+
 
 class RegisterController extends Controller
 {
@@ -29,7 +34,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -38,6 +43,16 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+
+        if(Auth::check() && Auth::user()->role->id == 1){
+
+            $this->redirectTo = route('admin.homedash');
+        }
+        else{
+
+            $this->redirectTo = route('author.authdashboard');
+        }
+
         $this->middleware('guest');
     }
 
@@ -68,6 +83,10 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role_id' => 2,
+            'role_name' => "Author",
         ]);
     }
+
+    
 }

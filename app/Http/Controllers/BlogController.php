@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Blogpost;
+use App\User;
+
 
 class BlogController extends Controller
 {
@@ -43,11 +45,12 @@ class BlogController extends Controller
 
     public function mypost(){
 
-     $userid = Auth::id();
+        $user = User::find(Auth::id());
+     // $userid = Auth::id();
 
-     $post = Blogpost::all()->where('user_id', $userid);
+     // $post = Blogpost::all()->where('user_id', $userid);
 
-     return view('mypost', compact('post'));
+     return view('mypost', compact('user'));
     }
 
     public function create(){
@@ -59,8 +62,8 @@ class BlogController extends Controller
 
     	$post = new Blogpost;
 
-    	$post->p_title = $request->title;
-    	$post->p_content = $request->content;
+    	$post->title = $request->title;
+    	$post->content = $request->content;
         $post->user_id = Auth::id();
 
     	$post->save();
@@ -70,7 +73,7 @@ class BlogController extends Controller
 
     public function edit($id){
 
-    	$post = Blogpost::where('p_id',$id)->first();
+    	$post = Blogpost::where('id',$id)->first();
 
     	return view('edit', compact('post'));
 
@@ -78,20 +81,64 @@ class BlogController extends Controller
 
     public function update(Request $request, $id){
 
-    	$post = Blogpost::where('p_id',$id)->first();
+        $user = Auth::id();
 
-	    $post->p_title = $request->title;
-    	$post->p_content = $request->content;
+    	$post = Blogpost::where('id',$id)->first();
 
-    	$post->save();
+        if($post->user_id == $user){
 
-    	return redirect(route('mypost'))->with('successMsg', 'Post Successfully Updated');
+            $post->title = $request->title;
+            $post->content = $request->content;
+
+            $post->save();
+
+            return redirect(route('mypost'))->with('successMsg', 'Post Successfully Updated');
+        }
+        else{
+            return redirect(route('home'))->with('successMsg', 'This post does not belong to you!!');
+        }
+        //to do: add user checking
+
+        // $user = User::find(Auth::id());
     }
 
     public function delete($id){
 
-    	Blogpost::where('p_id', $id)->first()->delete();
+    	Blogpost::where('id',$id)->first()->delete();
 
     	return redirect(route('mypost'))->with('successMsg', 'Post Successfully Deleted');
+    }
+
+
+
+    public function index1()
+    {
+        return Blogpost::all();
+    }
+ 
+    public function show1($id)
+    {
+        return Blogpost::find($id);
+    }
+
+    public function store1(Request $request)
+    {
+        return Blogpost::create($request->all());
+    }
+
+    public function update1(Request $request, $id)
+    {
+        $post = Blogpost::findOrFail($id);
+        $post->update($request->all());
+
+        return $article;
+    }
+
+    public function delete1(Request $request, $id)
+    {
+        $post = Blogpost::findOrFail($id);
+        $post->delete();
+
+        return 204;
     }
 }

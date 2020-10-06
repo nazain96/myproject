@@ -50,36 +50,11 @@
 
             <div>
 
-              <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Cyber Security</h5>
-              <h5 class="card-title pt-2">{{ $posts->p_title }}</h5>
-              <p>{{ $posts->p_content }}</p>
+              <h5 class="pink-text"><i class="fa fa-desktop"></i> Cyber Security</h5>
+              <h5 class="card-title pt-2">{{ $posts->title }}</h5>
+              <p>{{ $posts->content }}</p>
 
-              <!-- <a class="btn btn-raised btn-primary btn-sm" href="{{ route('edit', $posts->p_id) }}"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
-                          </a>
-
-                          ||
-
-                          <form id="delete-form-{{ $posts->p_id }}" action="{{ route('delete', $posts->p_id) }}" method="POST" style="display:none;">
-                          
-                          {{ csrf_field() }}          
-                          {{ method_field('delete') }}
-
-                        </form>
-
-                        <button onclick="if(confirm('Are you sure to delete this post?')) {
-
-                          event.preventDefault();
-                          document.getElementById('delete-form-{{ $posts->p_id }}').submit();
-
-                        }else{
-                          event.preventDefault();
-                        }
-
-                        " class="btn btn-raised btn-danger btn-sm" href=""> 
-
-                        <i class="fa fa-trash" aria-hidden="true"></i> 
-
-                        </button> -->
+              
 
            </div>
 

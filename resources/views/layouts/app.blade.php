@@ -37,19 +37,22 @@
     <!-- Fonts -->
 
     <!-- Styles -->
-    <style type="text/css">
+    <!-- <style type="text/css">
         
         body {
           background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);
-        }
+          background-size: cover;
 
-    </style>
+    </style> -->
 
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">  -->
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
     <!-- Styles -->
+
 </head>
 <body>
     <div id="app">
@@ -58,7 +61,7 @@
 
             <div class="container">
 
-                <a class="navbar-brand" href="{{ url('/home') }}">
+                <a style="text-align: left;" class="navbar-brand" href="{{ url('/') }}">
                     <!-- {{ config('app.name', 'Houston') }} -->
                     Houston
                 </a>
@@ -71,13 +74,24 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
+
                          @if (Route::has('login'))
 
                             <div class="top-right links">
 
                                 @auth
-                                    <a style="color: white;" href="{{ route('mypost') }}">My Post |</a>
-                                    <a style="color: white;" href="{{ url('/create') }}">Add Post</a>
+
+                                @if(Auth::check() && Auth::user()->role->id == 1)
+
+                                    <a style="color: white;" href="{{ route('admin.homedash') }}"> Home |</a>
+                                    <a style="color: white;" href="{{ route('admin.mypost') }}">My Post |</a>
+                                    <a style="color: white;" href="{{ route('admin.create') }}">Add Post |</a>
+                                    <a style="color: white;" href="{{ route('admin.userslist') }}">List of Users</a> 
+                                @else
+                                    <a style="color: white;" href="{{ route('author.authdashboard') }}"> Home |</a>
+                                    <a style="color: white;" href="{{ route('author.mypost') }}">My Post |</a>
+                                    <a style="color: white;" href="{{ route('author.create') }}">Add Post</a>
+                                @endif
                                 
                                 @endauth
 
@@ -86,7 +100,7 @@
                         @endif
 
                     </ul>
-
+                    
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -101,12 +115,18 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
                                 </a>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> 
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <i class="fas fa-user"></i> 
+                                    {{ Auth::user()->name }}
+                                                        
+                                </a>
+                                
+                                <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                                  aria-labelledby="navbarDropdownMenuLink-333">
+
+                                  <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -115,8 +135,10 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
                                 </div>
-                            </li>
+
+                              </li>
                         @endguest
                     </ul>
                 </div>

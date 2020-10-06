@@ -86,6 +86,10 @@
               <!--Card content-->
               <div class="card-body px-lg-5 pt-0">
 
+                @if (session('message'))
+                    <div class="alert alert-danger">{{ session('message') }}</div>
+                @endif
+
                 <!-- Form -->
                 <form class="text-center" style="color: #757575;" method="POST" action="{{ route('login') }}">
                     @csrf

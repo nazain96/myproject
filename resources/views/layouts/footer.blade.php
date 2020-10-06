@@ -1,7 +1,7 @@
 <!--Footer -->
 
-<!-- <div class="fixed-bottom"> -->
-<div class="float-bottom">
+<div class="fixed-bottom">
+<!-- <div class="float-bottom"> -->
 <footer class="page-footer" style="background-color: #800000;">
 
   <!-- Copyright -->
@@ -13,4 +13,4 @@
 </footer>
 
 </div>
-<!-- Footer-->
+<!-- Footer

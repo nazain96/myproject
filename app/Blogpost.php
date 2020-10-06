@@ -7,10 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Blogpost extends Model
 {
     //
-    protected $primaryKey = 'p_id';
+    protected $primaryKey = 'id';
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\User');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment','post_id');
     }
 }

@@ -14,9 +14,13 @@ class CreateBlogpostsTable extends Migration
     public function up()
     {
         Schema::create('blogposts', function (Blueprint $table) {
-            $table->bigIncrements('p_id');
-            $table->string('p_title', 50);
-            $table->string('p_content', 500);
+            $table->bigIncrements('id');
+            $table->string('title', 50);
+            $table->string('content', 500);
+
+            $table->BigInteger('user_id')->unsigned();
+            // Create foreign key constraints
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

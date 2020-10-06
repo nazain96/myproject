@@ -20,10 +20,11 @@
         </div>
     </div>
 </div> -->
+<body>
 
 <div class="container">
 
-<h1>My Blog Posts</h1>
+<h1 class="pink-text">My Blog Posts</h1>
 
 @if(session('successMsg'))
     {{ session('successMsg') }}
@@ -37,13 +38,13 @@
 
 <table class="table table-borderless">
 
-@foreach($post as $posts)
+@foreach($user->blogpost as $posts)
 
 <tr>
 
     <td>
 
-        
+         
         <div class="card card-image" style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
 
           <!-- <div class="card-body"> -->
@@ -51,16 +52,16 @@
 
             <div>
 
-              <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Cyber Security</h5>
-              <h5 class="card-title pt-2">{{ $posts->p_title }}</h5>
-              <p>{{ $posts->p_content }}</p>
+              <h5 class="pink-text"><i class="fa fa-desktop"></i> Cyber Security</h5>
+              <h5 class="card-title pt-2">{{ $posts->title }}</h5>
+              <p>{{ $posts->content }}</p>
             
-            <a class="btn btn-raised btn-primary btn-sm" href="{{ route('edit', $posts->p_id) }}"> Edit    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+            <a class="btn btn-raised btn-primary btn-sm" href="{{ route('edit', $posts->id) }}"> Edit    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
                         </a>
 
                         ||
 
-                        <form id="delete-form-{{ $posts->p_id }}" action="{{ route('delete', $posts->p_id) }}" method="POST" style="display:none;">
+                        <form id="delete-form-{{ $posts->id }}" action="{{ route('delete', $posts->id) }}" method="POST" style="display:none;">
                         
                         {{ csrf_field() }}          
                         {{ method_field('delete') }}
@@ -70,7 +71,7 @@
                       <button onclick="if(confirm('Are you sure to delete this post?')) {
 
                         event.preventDefault();
-                        document.getElementById('delete-form-{{ $posts->p_id }}').submit();
+                        document.getElementById('delete-form-{{ $posts->id }}').submit();
 
                       }else{
                         event.preventDefault();
@@ -92,26 +93,12 @@
 </tr>
 @endforeach
 
+
 </table>
 
-<!-- Card -->
-<div class="card card-image"
-  style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);">
 
-  <!-- Content -->
-  <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-    <div>
-      <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Marketing</h5>
-      <h3 class="card-title pt-2"><strong>This is the card title</strong></h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,
-        optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos.
-        Odit sed qui, dolorum!.</p>
-      <a class="btn btn-pink"><i class="fas fa-clone left"></i> View project</a>
-    </div>
-  </div>
 
 </div>
-<!-- Card -->
 
-</div>
+</body>
 @endsection
